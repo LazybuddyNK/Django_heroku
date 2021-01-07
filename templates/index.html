@@ -1,0 +1,132 @@
+{% load static %}
+<!DOCTYPE HTML>
+<!--
+	Epilogue by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+	<head>
+		<title>Epilogue by TEMPLATED</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+	</head>
+	<body>
+
+		<!-- Header -->
+			<header id="header" class="alt">
+				<div class="inner">
+					<h1>Picshub</h1>
+					<p>
+						<a href="/">Home</a><br><br>
+						{% if user.is_authenticated %}
+						Hello, {{user.first_name}}<br>
+						<a href="accounts/logout">Log Out</a><br>
+						{% else %}
+						<a href="accounts/register">Register</a><br>
+						<a href="accounts/login">Login</a>
+						{% endif %}
+					</p>
+				</div>
+			</header>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Banner -->
+					<!-- <section id="intro" class="main">
+						<span class="icon fa-diamond major"></span>
+						<h2>Magna porta maximus</h2>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae<br />
+						malesuada turpis. Nam pellentesque in ac aliquam. Aliquam tempor<br />
+						mi porta egestas maximus lorem ipsum dolor.</p>
+						<ul class="actions">
+							<li><a href="{% static '#' %}" class="button big">Learn More</a></li>
+						</ul>
+					</section> -->
+
+				<!-- Items -->
+				{% for img in imgs %}
+					<section class="main items">
+						
+						<article class="item">
+							<header>
+								<a href="{{img.img.url}}"><img src="{{img.img.url}}" alt="" /></a>
+								<!-- <h3>Feugiat et faucibus</h3> -->
+							</header>
+							<p><strong>{{img.desc}}</strong></p>
+							<!-- <ul class="actions">
+								<li><a href="{% static '#' %}" class="button">More</a></li>
+							</ul> -->
+							<a href="app/del_img" class="button big">Delete</a>
+						</article>
+						
+						
+					</section>
+					
+				{% endfor %}
+<!-- 
+				{% if img %}
+				<h3>Succesfully uploaded : {{img.img.url}}</h3>
+				<img src="{{ img.img.url}}" alt="image" class="img-thumbnail"  >
+				{% endif %} -->
+				<hr>
+
+				<!-- CTA -->
+					<form action="" id="cta" class="main special" method="post" enctype="multipart/form-data">
+
+						{% csrf_token %} 
+    				    
+
+						<h2>Upload Image</h2>
+						<!-- <p>Phasellus ac augue ac magna auctor tempus proin<br />
+						accumsan lacus a nibh commodo in pellentesque dui<br />
+						in hac habitasse platea dictumst.</p> -->
+						{% if user.is_authenticated %}
+						<ul class="actions">
+							{{ form.as_p }}
+							<!-- <li><strong>Browse:  </strong></li>
+							<li><input type="file" class="button big" name="document"></li><br><br>
+							<li><strong>Description:  </strong></li>
+							<li><input class="button big" name="document" size=60></li><br><br> -->
+							
+							<li><button type="submit" class="button big">Upload</button></li>
+						{% else %}
+							<a href="accounts/login" class="button big">Upload</a>
+						{% endif %}
+						</ul>
+					</form>
+
+				<!-- Main -->
+				<!--
+					<section id="main" class="main">
+						<header>
+							<h2>Lorem ipsum dolor</h2>
+						</header>
+						<p>Fusce malesuada efficitur venenatis. Pellentesque tempor leo sed massa hendrerit hendrerit. In sed feugiat est, eu congue elit. Ut porta magna vel felis sodales vulputate. Donec faucibus dapibus lacus non ornare. Etiam eget neque id metus gravida tristique ac quis erat. Aenean quis aliquet sem. Ut ut elementum sem. Suspendisse eleifend ut est non dapibus. Nulla porta, neque quis pretium sagittis, tortor lacus elementum metus, in imperdiet ante lorem vitae ipsum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam eget neque id metus gravida tristique ac quis erat. Aenean quis aliquet sem. Ut ut elementum sem. Suspendisse eleifend ut est non dapibus. Nulla porta, neque quis pretium sagittis, tortor lacus elementum metus, in imperdiet ante lorem vitae ipsum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+					</section>
+				-->
+
+				<!-- Footer -->
+					<footer id="footer">
+						<ul class="icons">
+							<li><a href="{% static '#' %}" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+							<li><a href="{% static '#' %}" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+							<li><a href="{% static '#' %}" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+							<li><a href="{% static '#' %}" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
+							<li><a href="{% static '#' %}" class="icon fa-envelope"><span class="label">Email</span></a></li>
+						</ul>
+						<p class="copyright">&copy; Untitled. Design: <a href="{% static 'https://templated.co' %}">TEMPLATED</a>. Images: <a href="{% static 'https://unsplash.com' %}">Unsplash</a>.</p>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+			<script src="{% static 'assets/js/skel.min.js' %}"></script>
+			<script src="{% static 'assets/js/util.js' %}"></script>
+			<script src="{% static 'assets/js/main.js' %}"></script>
+
+	</body>
+</html>
